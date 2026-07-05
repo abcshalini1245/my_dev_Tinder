@@ -41,15 +41,39 @@
 
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
+
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+const navigate = useNavigate();
+
+  const handleLogout = async () => {
+  try {
+    await axios.post(
+      BASE_URL + "/logout",
+      {},
+      { withCredentials: true }
+    );
+
+    dispatch(removeUser());
+    navigate("/login");
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   return (
     <div className="navbar bg-base-300 shadow-sm px-5">
       {/* Logo */}
       <div className="flex-1">
-        <a className="btn btn-ghost text-2xl font-bold">DevTinder</a>
+        <Link to="/" className="btn btn-ghost text-2xl font-bold">DevTinder</Link>
       </div>
 
       {/* Right Side */}
@@ -81,17 +105,24 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-1 w-52 rounded-box bg-base-100 p-2 shadow"
             >
+                <li>
+                <Link to="/feed"> Feed</Link>
+              </li>
+             <li>
+<Link to="/profile">Profile</Link>
+</li>
               <li>
-                <a>Profile</a>
+                <Link to="/user/connections"> Connections</Link>
+              </li>
+
+
+                <li>
+                <Link to="/user/requests/recieved">Requests</Link>
               </li>
 
               <li>
-                <a>Settings</a>
-              </li>
-
-              <li>
-                <a>Logout</a>
-              </li>
+  <button onClick={handleLogout}>Logout</button>
+</li>
             </ul>
           </div>
         </div>

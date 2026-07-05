@@ -1,0 +1,139 @@
+// import axios from "axios";
+// import { BASE_URL } from "../utils/constants";
+// import { useEffect } from "react";
+// import { useDispatch } from "react-redux";
+// import { addConnections } from "../utils/connectionSlice";
+
+// const Connections = () => {
+//   const dispatch = useDispatch();
+//   const fetchConnections = async () => {
+//     try {
+//       const res = await axios.get(
+//         BASE_URL + "/user/connections",
+//         {
+//           withCredentials: true,
+//         }
+//       );
+
+//       console.log(res.data.data);
+//       dispatch(addConnections(res.data))
+//     } catch (err) {
+//       // Handle Error Case
+//       console.error(err);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchConnections();
+//   }, []);
+
+//   return (
+//     <div className="flex justify-center my-10">
+//   <h1 className="text-2xl font-bold">Connections</h1>
+// </div>
+//   );
+// };
+
+// export default Connections;
+
+
+
+
+
+
+
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addConnections } from "../utils/connectionSlice";
+
+const Connections = () => {
+  const dispatch = useDispatch();
+  const connections = useSelector((store) => store.connection);
+
+  const fetchConnections = async () => {
+    // Don't fetch again if already in Redux
+    if (connections) return;
+
+    try {
+      const res = await axios.get(
+        BASE_URL + "/user/connections",
+        {
+          withCredentials: true,
+        }
+      );
+
+      dispatch(addConnections(res.data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchConnections();
+  }, []);
+
+  if (!connections)
+    return (
+      <h1 className="text-center text-2xl font-bold my-10">
+        Loading...
+      </h1>
+    );
+
+  if (connections.length === 0)
+    return (
+      <h1 className="text-center text-2xl font-bold my-10">
+        No Connections Found
+      </h1>
+    );
+
+  return (
+    <div className="my-10">
+      <h1 className="text-center text-3xl font-bold mb-8">
+        Connections
+      </h1>
+
+      <div className="flex flex-col items-center gap-5">
+        {connections.map((connection) => {
+          const {
+            _id,
+            firstName,
+            lastName,
+            age,
+            gender,
+            about,
+            photourl,
+          } = connection;
+
+          return (
+            <div
+              key={_id}
+              className="flex w-2/4 bg-base-300 rounded-xl shadow-md p-2 items-center gap-3"
+            >
+              <img
+                src={photourl}
+                alt={firstName}
+                className="w-24 h-24 rounded-full object-cover"
+              />
+
+              <div>
+                <h2 className="text-m font-bold">
+                  {firstName} {lastName}
+                </h2>
+
+                <p className="text-gray-400">
+                  {age}, {gender}
+                </p>
+
+                <p className="mt-1 line-clamp-2">{about}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default Connections;
