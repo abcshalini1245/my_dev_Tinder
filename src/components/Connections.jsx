@@ -47,6 +47,8 @@ import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
+import { Link } from "react-router-dom";
+
 
 const Connections = () => {
   const dispatch = useDispatch();
@@ -89,6 +91,7 @@ const Connections = () => {
     );
 
   return (
+    
     <div className="my-10">
       <h1 className="text-center text-3xl font-bold mb-8">
         Connections
@@ -127,13 +130,23 @@ const Connections = () => {
                 </p>
 
                 <p className="mt-1 line-clamp-2">{about}</p>
+              <Link to={`/profile/${_id}`}>
+  <button className="btn btn-primary mt-2">
+    View Profile
+  </button>
+</Link>
               </div>
             </div>
           );
         })}
-      </div>
+     
+      
+
     </div>
+     </div>
   );
 };
+
+
 
 export default Connections;

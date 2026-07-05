@@ -22,6 +22,13 @@ const EditProfile = ({ user }) => {
   const [about, setAbout] = useState(user?.about || "");
   const [skills, setSkills] = useState(user?.skills || []);
   const [photourl, setPhoto] = useState(user?.photourl || "");
+  const [location, setLocation] = useState(user?.location || "");
+  const [education, setEducation] = useState(user?.education || "");
+    const [experience, setExperience] = useState(user?.experience || "");
+const [company, setCompany] = useState(user?.company || "");
+const [github, setGithub] = useState(user?.github || "");
+const [linkedin, setLinkedin] = useState(user?.linkedin || "");
+const [portfolio, setPortfolio] = useState(user?.portfolio || "");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -37,6 +44,15 @@ useEffect(() => {
     setAbout(user.about || "");
     setSkills(user.skills || []);
     setPhoto(user.photourl || "");
+
+
+    setLocation(user.location || "");
+    setEducation(user.education || "");
+    setExperience(user.experience || "");
+    setCompany(user.company || "");
+    setGithub(user.github || "");
+    setLinkedin(user.linkedin || "");
+    setPortfolio(user.portfolio || "");
   }
 }, [user]);
 
@@ -59,6 +75,13 @@ const saveProfile = async () => {
         gender,
         about,
         skills,
+          location,
+      education,
+      company,
+      github,
+      linkedin,
+      portfolio,
+      experience,
       },
       {
         withCredentials: true,
@@ -193,6 +216,94 @@ const saveProfile = async () => {
             />
           </label>
 
+
+
+          <label className="form-control w-full my-1">
+  <div className="label">
+    <span className="label-text">Location</span>
+  </div>
+  <input
+    type="text"
+    className="input input-bordered w-full"
+    value={location}
+    onChange={(e) => setLocation(e.target.value)}
+  />
+</label>
+
+<label className="form-control w-full my-1">
+  <div className="label">
+    <span className="label-text">Education</span>
+  </div>
+  <input
+    type="text"
+    className="input input-bordered w-full"
+    value={education}
+    onChange={(e) => setEducation(e.target.value)}
+  />
+</label>
+
+
+
+<label className="form-control w-full my-1">
+  <div className="label">
+    <span className="label-text">Experience</span>
+  </div>
+  <input
+    type="text"
+    className="input input-bordered w-full"
+    value={experience}
+    onChange={(x) => setExperience(x.target.value)}
+  />
+</label>
+
+<label className="form-control w-full my-1">
+  <div className="label">
+    <span className="label-text">Company</span>
+  </div>
+  <input
+    type="text"
+    className="input input-bordered w-full"
+    value={company}
+    onChange={(e) => setCompany(e.target.value)}
+  />
+</label>
+
+<label className="form-control w-full my-1">
+  <div className="label">
+    <span className="label-text">GitHub</span>
+  </div>
+  <input
+    type="url"
+    className="input input-bordered w-full"
+    value={github}
+    onChange={(e) => setGithub(e.target.value)}
+  />
+</label>
+
+<label className="form-control w-full my-1">
+  <div className="label">
+    <span className="label-text">LinkedIn</span>
+  </div>
+  <input
+    type="url"
+    className="input input-bordered w-full"
+    value={linkedin}
+    onChange={(e) => setLinkedin(e.target.value)}
+  />
+</label>
+
+<label className="form-control w-full my-1">
+  <div className="label">
+    <span className="label-text">Portfolio</span>
+  </div>
+  <input
+    type="url"
+    className="input input-bordered w-full"
+    value={portfolio}
+    onChange={(e) => setPortfolio(e.target.value)}
+  />
+</label>
+
           
 
 
@@ -243,6 +354,13 @@ const saveProfile = async () => {
         about,
         photourl,
         skills,
+          location,
+      education,
+      company,
+      github,
+      linkedin,
+      portfolio,
+      experience
       }}
     />
 </div>

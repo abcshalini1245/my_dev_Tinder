@@ -9,6 +9,7 @@ import Feed from "./components/Feed";
 import Connections from "./components/Connections";
 import RequestRecieved from "./components/RequestRecieved";
 import { Navigate } from "react-router-dom";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -30,7 +31,9 @@ function App() {
     <Route
       path="user/requests/recieved"
       element={<RequestRecieved />}
+    
     />
+    <Route path="/profile/:userId" element={<UserProfile />} />
   </Route>
 </Routes>
       
