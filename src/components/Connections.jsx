@@ -40,6 +40,7 @@
 
 
 
+import SkeletonCard from "./SkeletonCard";
 
 
 import axios from "axios";
@@ -78,9 +79,9 @@ const Connections = () => {
 
   if (!connections)
     return (
-      <h1 className="text-center text-2xl font-bold my-10">
-        Loading...
-      </h1>
+        <div className="flex justify-center mt-10">
+      <SkeletonCard />
+    </div>
     );
 
   if (connections.length === 0)

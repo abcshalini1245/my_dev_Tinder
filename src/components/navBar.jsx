@@ -38,7 +38,7 @@
 // export default navBar
 
 
-
+import ThemeToggle from "./ThemeToggle";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -70,7 +70,7 @@ const navigate = useNavigate();
 };
 
   return (
-    <div className="navbar bg-base-300 shadow-sm px-5">
+    <div className="navbar bg-blue-900 shadow-sm px-5 text-neutral-content">
       {/* Logo */}
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-2xl font-bold">DevTinder</Link>
@@ -79,6 +79,8 @@ const navigate = useNavigate();
       {/* Right Side */}
       {user && (
         <div className="flex items-center gap-4">
+           {/* Theme Toggle */}
+  <ThemeToggle />
           <p className="font-semibold">
             Welcome, {user.firstName}
           </p>

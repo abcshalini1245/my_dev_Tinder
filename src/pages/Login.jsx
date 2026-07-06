@@ -70,7 +70,7 @@
 
 
 
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -80,7 +80,7 @@ import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
-
+const [showPassword, setShowPassword] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
@@ -218,51 +218,73 @@ const Login = () => {
               Password
             </legend>
 
-            <input
-              type="password"
-              className="input w-full"
-              placeholder="Enter Password"
-              value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
-            />
+            <div className="relative">
+
+  <input
+    type={showPassword ? "text" : "password"}
+    className="input w-full pr-12"
+    placeholder="Enter Password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+  />
+
+  <button
+    type="button"
+    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary transition"
+    onClick={() => setShowPassword(!showPassword)}
+  >
+    {showPassword ? <FaEyeSlash /> : <FaEye />}
+  </button>
+
+</div>
           </fieldset>
 
           {error && (
-            <p className="text-red-500 mt-2">{error}</p>
-          )}
+  <div className="alert alert-error mt-4">
+    <span>{error}</span>
+  </div>
+)}
 
-          <div className="card-actions justify-center mt-4">
-            <button
-              className="btn btn-primary w-32"
-              onClick={
-                isLoginForm
-                  ? handleLogin
-                  : handleSignup
-              }
-            >
-              {isLoginForm ? "Login" : "Signup"}
-            </button>
-          </div>
+{/* Forgot Password */}
+{isLoginForm && (
+  <div className="text-right mt-2">
+    <button
+      className="link link-primary text-sm"
+      onClick={() => navigate("/forgot-password")}
+    >
+      Forgot Password?
+    </button>
+  </div>
+)}
 
-          <p className="text-center mt-5">
-            {isLoginForm
-              ? "New User? "
-              : "Already have an account? "}
+<div className="card-actions justify-center mt-6">
+  <button
+    className="btn btn-primary w-full"
+    onClick={
+      isLoginForm ? handleLogin : handleSignup
+    }
+  >
+    {isLoginForm ? "Login" : "Signup"}
+  </button>
+</div>
 
-            <span
-              className="text-blue-500 cursor-pointer font-semibold hover:underline"
-              onClick={() => {
-                setIsLoginForm(!isLoginForm);
-                setError("");
-              }}
-            >
-              {isLoginForm
-                ? "Signup Here"
-                : "Login Here"}
-            </span>
-          </p>
+<p className="text-center mt-5">
+  {isLoginForm
+    ? "New User? "
+    : "Already have an account? "}
+
+  <span
+    className="text-primary cursor-pointer font-semibold hover:underline"
+    onClick={() => {
+      setIsLoginForm(!isLoginForm);
+      setError("");
+    }}
+  >
+    {isLoginForm
+      ? "Signup Here"
+      : "Login Here"}
+  </span>
+</p>
 
         </div>
       </div>

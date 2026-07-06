@@ -13,6 +13,7 @@ const Body = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  
 
   const fetchUser = async () => {
     try {
@@ -33,12 +34,30 @@ const Body = () => {
     }
   };
 
-  useEffect(() => {
-    // Don't call the API if the user is already in Redux
-    if (!userData && location.pathname !== "/login") {
-      fetchUser();
-    }
-  }, [userData, location.pathname]);
+  // useEffect(() => {
+  //   // Don't call the API if the user is already in Redux
+  //   if (!userData && location.pathname !== "/login") {
+  //     fetchUser();
+  //   }
+  // }, [userData, location.pathname]);
+
+
+  
+
+
+useEffect(() => {
+  const publicRoutes = [
+    "/login",
+    "/forgot-password",
+    "/reset-password",
+  ];
+
+  if (publicRoutes.includes(location.pathname)) {
+    return;
+  }
+
+  fetchUser();
+}, [location.pathname]);
 
 
 //   useEffect(() => {

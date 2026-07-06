@@ -2,7 +2,7 @@ import NavBar from "./components/navBar";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import Body from "./components/Body";
 import Profile from "./components/Profile";
-import Login from "./components/Login";  
+import Login from "./pages/Login";  
 import {Provider} from "react-redux";
 import appStore from "./utils/appStore";
 import Feed from "./components/Feed";
@@ -10,6 +10,9 @@ import Connections from "./components/Connections";
 import RequestRecieved from "./components/RequestRecieved";
 import { Navigate } from "react-router-dom";
 import UserProfile from "./components/UserProfile";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import ChangePassword from "./components/ChangePassword";
 
 function App() {
   return (
@@ -34,7 +37,17 @@ function App() {
     
     />
     <Route path="/profile/:userId" element={<UserProfile />} />
+    <Route
+    path="/forgot-password"
+    element={<ForgotPassword />}
+/>
   </Route>
+  <Route path="/reset-password" element={<ResetPassword />} />
+  <Route
+    path="/change-password"
+    element={<ChangePassword />}
+/>
+  
 </Routes>
       
       

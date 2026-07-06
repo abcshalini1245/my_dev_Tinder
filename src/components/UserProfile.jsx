@@ -1,247 +1,4 @@
-// // import React, { useEffect, useState } from "react";
-// // import { useParams } from "react-router-dom";
-// // import axios from "axios";
-// // import { BASE_URL } from "../utils/constants"; // adjust path if needed
-
-// // const UserProfile = () => {
-// //   const { userId } = useParams();
-// //   const [user, setUser] = useState(null);
-
-// //   useEffect(() => {
-// //     fetchProfile();
-// //   }, []);
-
-// //   const fetchProfile = async () => {
-// //     try {
-// //       const res = await axios.get(
-// //         BASE_URL + "/user/profile/" + userId,
-// //         {
-// //           withCredentials: true,
-// //         }
-// //       );
-
-// //       setUser(res.data); // or res.data.data depending on your API response
-// //     } catch (err) {
-// //       console.error(err);
-// //     }
-// //   };
-
-// //   if (!user) return <h1>Loading...</h1>;
-
-// //   return (
-// //     <div>
-// //       <h1>
-// //         {user.firstName} {user.lastName}
-// //       </h1>
-// //       <p>{user.about}</p>
-// //       <p>{user.location}</p>
-// //       <p>{user.education}</p>
-// //       <p>{user.company}</p>
-// //       <p>{user.github}</p>
-// //       <p>{user.linkedin}</p>
-// //       <p>{user.portfolio}</p>
-// //     </div>
-// //   );
-// // };
-
-// // export default UserProfile;
-
-
-
-
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import axios from "axios";
-// import { BASE_URL } from "../utils/constants";
-
-// const UserProfile = () => {
-//   const { userId } = useParams();
-//   const [user, setUser] = useState(null);
-
-//   useEffect(() => {
-//     fetchProfile();
-//   }, []);
-
-//   const fetchProfile = async () => {
-//     try {
-//       const res = await axios.get(
-//         BASE_URL + "/user/profile/" + userId,
-//         {
-//           withCredentials: true,
-//         }
-//       );
-
-//       setUser(res.data);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-
-//   if (!user)
-//     return (
-//       <div className="flex justify-center mt-20">
-//         <span className="loading loading-spinner loading-lg"></span>
-//       </div>
-//     );
-
-//   return (
-//     <div className="max-w-5xl mx-auto px-6 py-10">
-
-//       {/* Header */}
-//       <div className="card bg-base-200 shadow-xl">
-//         <div className="card-body items-center text-center">
-
-//           <div className="avatar">
-//             <div className="w-40 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-//               <img src={user.photourl} alt="Profile" />
-//             </div>
-//           </div>
-
-//           <h1 className="text-4xl font-bold mt-4">
-//             {user.firstName} {user.lastName}
-//           </h1>
-
-//           <p className="text-lg opacity-70">
-//             {user.age} • {user.gender}
-//           </p>
-
-//           {user.location && (
-//             <p className="text-primary mt-2">
-//                 📍 {user.location}
-//             </p>
-//           )}
-//         </div>
-//       </div>
-
-//       {/* About */}
-//       <div className="card bg-base-200 shadow-xl mt-8">
-//         <div className="card-body">
-//           <h2 className="card-title text-2xl">About</h2>
-//           <p>{user.about}</p>
-//         </div>
-//       </div>
-
-//       {/* Education & Company */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-
-//         <div className="card bg-base-200 shadow-xl">
-//           <div className="card-body">
-//             <h2 className="card-title">
-//               🎓 Education
-//             </h2>
-
-//             <p>
-//               {user.education || "Not Added"}
-//             </p>
-//           </div>
-//         </div>
-
-        
-
-
-
-
-
-
-//         <div className="card bg-base-200 shadow-xl">
-//           <div className="card-body">
-//             <h2 className="card-title">
-//               💼 Company
-//             </h2>
-
-//             <p>
-//               {user.company || "Not Added"}
-//             </p>
-//           </div>
-//         </div>
-
-//       </div>
-
-//       {/* Experience */}
-//         <div className="card bg-base-200 shadow-xl mt-8">
-//         <div className="card-body">
-//           <h2 className="card-title text-xl">Experience</h2>
-//           <p>{user.experience}</p>
-//         </div>
-//       </div>
-
-//       {/* Skills */}
-//       <div className="card bg-base-200 shadow-xl mt-8">
-//         <div className="card-body">
-//           <h2 className="card-title text-2xl">
-//             Skills
-//           </h2>
-
-//           <div className="flex flex-wrap gap-3 mt-2">
-
-//             {user.skills?.length ? (
-//               user.skills.map((skill, index) => (
-//                 <div
-//                   key={index}
-//                   className="badge badge-primary badge-lg"
-//                 >
-//                   {skill}
-//                 </div>
-//               ))
-//             ) : (
-//               <p>No Skills Added</p>
-//             )}
-
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Social Links */}
-//       <div className="card bg-base-200 shadow-xl mt-8">
-//         <div className="card-body">
-//           <h2 className="card-title text-2xl">
-//             Social Links
-//           </h2>
-
-//           <div className="flex flex-wrap gap-4 mt-3">
-
-//             {user.github && (
-//               <a
-//                 href={user.github}
-//                 target="_blank"
-//                 rel="noreferrer"
-//                 className="btn btn-outline"
-//               >
-//                 Github
-//               </a>
-//             )}
-
-//             {user.linkedin && (
-//               <a
-//                 href={user.linkedin}
-//                 target="_blank"
-//                 rel="noreferrer"
-//                 className="btn btn-outline btn-info"
-//               >
-//                 LinkedIn
-//               </a>
-//             )}
-
-//             {user.portfolio && (
-//               <a
-//                 href={user.portfolio}
-//                 target="_blank"
-//                 rel="noreferrer"
-//                 className="btn btn-outline btn-success"
-//               >
-//                 Portfolio
-//               </a>
-//             )}
-
-//           </div>
-//         </div>
-//       </div>
-
-//     </div>
-//   );
-// };
-
-// export default UserProfile;
+ 
 
 
 
@@ -255,6 +12,7 @@
 
 
 
+import SkeletonCard from "./SkeletonCard";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -294,15 +52,15 @@ const UserProfile = () => {
   };
 
   if (!user) {
-    return (
-      <div className="flex justify-center items-center h-[70vh]">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
-    );
-  }
+  return (
+    <div className="flex justify-center mt-10">
+      <SkeletonCard />
+    </div>
+  );
+}
 
   return (
-    <div className="max-w-6xl mx-auto px-5 py-10">
+    <div className="max-w-6xl mx-auto px-5 py-24">
 
       {/* Header */}
 
