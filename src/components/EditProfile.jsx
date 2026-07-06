@@ -294,7 +294,7 @@ setPreviewImage(user.photourl || "");
   <label className="form-control w-full ">
 
     <div className="label">
-      <span className="label-text font-semibold p-4 mb-2">
+      <span className="label-text font-semibold p-4 ">
         Paste Image URL: 
       </span>
     </div>
@@ -333,7 +333,7 @@ setPreviewImage(user.photourl || "");
 
           {/* Age + Gender */}
 
-          <div className="grid grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-2 gap-4 mt-0.5">
 
             <label className="form-control">
 
